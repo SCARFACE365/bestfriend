@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For Afsa 💖</title>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /*
+      Save the images in the same folder as this file with these names:
+        - image1.jpg  (hero / "Dear Afsa" background)
+        - image2.jpg  (memories section background)
+        - image3.jpg  (letters section background)
+      Gallery photos (used inside Memories):
+        - images/photo1.jpg
+        - images/photo2.jpg
+        - images/photo3.jpg
+        - images/photo4.jpg
+    */
+
+    :root{
+      --bg-1: #070007;       /* near-black */
+      --bg-2: #22003a;       /* deep purple */
+      --accent-a: #9b59ff;   /* light purple */
+      --accent-b: #6b2bff;   /* vivid purple */
+      --muted: #cfc3ff;
+      --glass: rgba(255,255,255,0.04);
+      --card-shadow: 0 12px 40px rgba(0,0,0,0.6);
+      --radius: 14px;
+      --glass-border: rgba(255,255,255,0.03);
+      --text: #fff;
+
+      --neon-pink: #ff4df0;
+      --neon-cyan: #2ce7ff;
+      --btn-grad: linear-gradient(90deg,#ff69b4,#ff4df0);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color:var(--text);
+      background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      line-height:1.5;
+    }
+
+    /* background blobs */
+    .bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+    .blob{
+      position:absolute;
+      filter: blur(48px);
+      opacity:0.9;
+      transform: translate3d(0,0,0);
+      mix-blend-mode: screen;
+    }
+    .b1{width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #9b59ff 0%, #6b2bff 40%, transparent 60%);left:-120px;top:-80px;animation: floatA 12s ease-in-out infinite;}
+    .b2{width:420px;height:420px;border-radius:50%;background:radial-gradient(circle at 70% 40%, #ff4da6 0%, #6b2bff 40%, transparent 70%);right:-140px;top:40px;animation: floatB 18s ease-in-out infinite;}
+    .b3{width:360px;height:360px;border-radius:50%;background:radial-gradient(circle at 50% 50%, #44006b 0%, #22003a 60%, transparent 85%);left:20%;bottom:-120px;animation: floatC 16s ease-in-out infinite;}
+
+    @keyframes floatA{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(28px) translateX(8px)}100%{transform:translateY(0) translateX(0)}}
+    @keyframes floatB{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(-32px) translateX(-20px)}100%{transform:translateY(0) translateX(0)}}
+    @keyframes floatC{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(18px) translateX(22px)}100%{transform:translateY(0) translateX(0)}}
+
+    /* NAV */
+    nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 28px;
+      max-width:1100px;
+      margin:0 auto;
+      position:relative;
+      z-index:3;
+    }
+    .logo{font-family:'Pacifico',cursive;color:var(--accent-a);font-size:20px}
+    .nav-actions{display:flex;gap:12px;align-items:center}
+    nav h2 { margin:0; color:var(--neon-pink); text-shadow:0 0 12px rgba(255,77,240,0.18); font-weight:600; }
+
+    /* HERO */
+    .hero{padding:48px 18px 80px;position:relative;z-index:2}
+    .hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center}
+    #home {
+      background-image:
+        linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.52)),
+        url('image1.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      min-height: 520px;
+      padding-top: 96px;
+      padding-bottom: 120px;
+      margin-bottom: 22px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    #home .content { position: relative; z-index: 2; text-align:center; color:var(--text); max-width:980px; margin:0 auto; padding: 0 12px; }
+    .hero-title{font-size:48px;margin:0 0 10px;color:var(--text);letter-spacing:-1px}
+    #home h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      margin: 0 0 12px;
+      color: var(--neon-pink);
+      text-shadow:
+        0 0 12px rgba(255,77,240,0.95),
+        0 0 28px rgba(138,60,255,0.85);
+    }
+    .hero-sub{color:var(--muted);margin:0 0 18px;max-width:560px}
+
+    .signature { margin-top: 18px; font-style: italic; color: rgba(255,255,255,0.92); }
+
+    /* CTA buttons (not required but available) */
+    .cta-row{display:flex;gap:12px;align-items:center;margin:18px 0}
+    .btn{padding:10px 16px;border-radius:12px;border:1px solid transparent;background:transparent;color:var(--text);cursor:pointer;font-weight:700}
+    .btn.primary{ background:linear-gradient(90deg,var(--accent-b),var(--accent-a)); box-shadow:0 8px 30px rgba(107,43,255,0.18); border:0; }
+    .btn.ghost{ border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.02); }
+
+    /* ABOUT card */
+    .about-card{max-width:900px;margin:30px auto;padding:22px;border-radius:16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);box-shadow:var(--card-shadow)}
+    .lead{color:var(--muted);margin-top:6px}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px}
+
+    /* MEMORIES */
+    #memories {
+      background-image:
+        linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.52)),
+        url('image2.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      padding-top: 72px;
+      padding-bottom: 72px;
+      margin: 22px 0;
+      border-radius: 12px;
+      position: relative;
+    }
+    #memories .content { position: relative; z-index: 2; }
+    #memories h2 { color: var(--neon-cyan); text-shadow: 0 0 10px rgba(44,231,255,0.95); margin-bottom: 18px; }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto 18px;
+      padding: 6px;
+      z-index:2;
+    }
+    .card {
+      background: rgba(255,255,255,0.94);
+      color: #111;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 6px 26px rgba(0,0,0,0.22);
+      font-weight: 600;
+      text-align: left;
+    }
+
+    /* gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 6px;
+      width: 100%;
+      max-width: 1100px;
+      z-index: 2;
+    }
+    .gallery img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+      cursor: pointer;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .gallery img:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(0,0,0,0.5); }
+
+    /* LETTERS */
+    #letters {
+      background-image:
+        linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.52)),
+        url('image3.jpg');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      padding-top: 72px;
+      padding-bottom: 72px;
+      margin: 22px 0;
+      border-radius: 12px;
+      position: relative;
+    }
+    #letters .content { position: relative; z-index: 2; }
+    #letters h2 { color: var(--neon-pink); text-shadow: 0 0 12px rgba(255,77,240,0.95); margin-bottom: 18px; }
+    .letter {
+      background: rgba(255,255,255,0.94);
+      color: #111;
+      margin: 14px auto;
+      padding: 18px;
+      max-width: 720px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      text-align: left;
+    }
+    .letter h3 {
+      color: var(--neon-cyan);
+      margin-bottom: 6px;
+    }
+
+    /* SECRET SECTION (neon / black panel) */
+    #secret-section {
+      padding: 48px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index: 4;
+    }
+
+    .secret-wrap {
+      width:100%;
+      max-width:880px;
+      text-align:center;
+      padding:44px 28px;
+      border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 30px 80px rgba(5,4,10,0.75), inset 0 1px 0 rgba(255,255,255,0.02);
+      position:relative;
+    }
+
+    .lock-badge{
+      width:78px;height:78px;border-radius:50%;
+      margin:0 auto 14px;
+      display:flex;align-items:center;justify-content:center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 10px 30px rgba(138,60,255,0.12), 0 0 22px rgba(255,77,240,0.06);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .secret-title {
+      font-size:28px;font-weight:700;margin:6px 0 6px;color:var(--neon-pink);
+      text-shadow:
+        0 0 8px rgba(255,77,240,0.95),
+        0 0 18px rgba(138,60,255,0.9);
+      display:flex;align-items:center;justify-content:center;gap:10px;
+    }
+    .secret-sub{ color: rgba(255,255,255,0.9); margin-bottom:12px; font-weight:600; }
+
+    .input-row{ display:flex; gap:12px; justify-content:center; align-items:center; margin-top:14px; flex-wrap:wrap; }
+    .secret-input{
+      min-width:320px; max-width: 60%; padding:14px 18px; border-radius:999px; border:0; outline:none; font-size:15px;
+      background:#fff; color:#111; box-shadow: 0 8px 30px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.85);
+    }
+    .unlock-btn{
+      padding:12px 20px; border-radius:999px; border:0; background: var(--btn-grad);
+      color:#fff; font-weight:700; cursor:pointer; box-shadow: 0 8px 30px rgba(255,77,240,0.14);
+      transition: transform .12s ease;
+    }
+    .unlock-btn:active{ transform: translateY(1px) scale(.998) }
+
+    .hint{ margin-top:12px; font-size:13px; color: rgba(255,255,255,0.7); }
+
+    .secret-message{
+      margin-top:24px; background: #fff; color:#111; padding:18px; border-radius:12px; max-width:700px; margin-left:auto; margin-right:auto;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35); transform-origin: center top; text-align:left; display:none;
+    }
+
+    /* Lightbox modal */
+    .lightbox {
+      position: fixed; inset: 0; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.9);
+      z-index: 200; padding: 24px;
+    }
+    .lightbox.open { display:flex; }
+    .lightbox img { max-width: 100%; max-height: 86vh; border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
+    .lightbox .caption { color: #fff; margin-top: 12px; text-align:center; font-weight:600; }
+    .lightbox .close { position: absolute; right: 18px; top: 18px; background: transparent; color: #fff; border: none; font-size: 22px; cursor: pointer; }
+
+    /* ABOUT/FOOTER */
+    .about-card{max-width:900px;margin:30px auto;padding:22px;border-radius:16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);box-shadow:var(--card-shadow)}
+    footer{text-align:center;padding:28px 8px;color:var(--muted);font-size:14px}
+
+    /* responsive */
+    @media (max-width:920px){
+      .hero-inner{grid-template-columns:1fr 260px}
+    }
+    @media (max-width:720px){
+      .hero-inner{grid-template-columns:1fr;gap:12px}
+      .secret-input{ min-width:220px; max-width:100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- background blobs -->
+  <div class="bg" aria-hidden="true">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <h2 class="logo">For Afsa 💖</h2>
+    <div class="nav-actions">
+      <!-- placeholder for actions -->
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="hero" aria-labelledby="home-heading">
+  <div class="content">
+    <h1 id="home-heading">Dear Afsa 💕</h1>
+    <p>
+      You didn’t become my best friend overnight —
+      it happened slowly, naturally, and honestly.
+    </p>
+    <p>
+      You saw me at my worst, celebrated my best,
+      and stayed through everything in between.
+    </p>
+    <p>
+      No matter how much we grow or change,
+      you’ll always have a place in my life.
+    </p>
+    <p class="signature">— Tarun</p>
+  </div>
+</section>
+
+
+  <!-- MEMORIES -->
+  <section id="memories" aria-labelledby="memories-heading">
+    <div class="content">
+      <h2 id="memories-heading">🌸 Our Memories</h2>
+
+      <div class="card-container" aria-hidden="false">
+  <div class="card">
+    🌙 <strong>Late-night talks</strong><br>
+    <span>Late-night talks that fixed my worst days</span>
+  </div>
+
+  <div class="card">
+    😂 <strong>Laughter</strong><br>
+    <span>Laughing so hard we forgot our problems</span>
+  </div>
+
+  <div class="card">
+    🤍 <strong>Support</strong><br>
+    <span>You standing by me when I felt alone</span>
+  </div>
+
+  <div class="card">
+    ✨ <strong>Small moments</strong><br>
+    <span>Every small moment that became special because of you</span>
+  </div>
+
+  <!-- NEW EMOTIONAL CARDS -->
+  <div class="card">
+    😤 <strong>We fight, we break, we pause</strong><br>
+    <span>But we always find our way back to friendship</span>
+  </div>
+
+  <div class="card">
+    🥤 <strong>I buy your favourite drinks and foods</strong><br>
+    <span>Because caring for you comes naturally</span>
+  </div>
+
+  <div class="card">
+    🤍 <strong>Even after the hardest arguments</strong><br>
+    <span>We choose understanding over walking away</span>
+  </div>
+
+  <div class="card">
+    ✨ <strong>No matter how much we change</strong><br>
+    <span>You will always be my best friend</span>
+  </div>
+</div>
+
+
+      
+
+  <!-- LETTERS -->
+  <section id="letters" aria-labelledby="letters-heading">
+    <div class="content">
+      <h2 id="letters-heading">💌 Letters for You</h2>
+
+      <div class="letter">
+        <h3>Open when you feel sad</h3>
+        <p>Afsa, even on your worst days, you are still enough. You don’t have to be strong all the time — I’m always here to hold you up.</p>
+      </div>
+
+      <div class="letter">
+        <h3>Open when you feel alone</h3>
+        <p>Distance, silence, or time can never remove you from my life. You are never alone — you carry a part of me with you always.</p>
+      </div>
+
+      <div class="letter">
+        <h3>Open when you miss me</h3>
+        <p>Missing someone only happens when the bond is real. And ours is something I’ll protect forever.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECRET SECTION (separate visual panel on same page) -->
+  <section id="secret-section" aria-labelledby="secret-heading">
+    <div class="secret-wrap" role="main" aria-labelledby="secret-heading">
+      <div class="lock-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="3.5" y="10" width="17" height="11" rx="2.5" fill="url(#g1)"></rect>
+          <path d="M7 10V7a5 5 0 0 1 10 0v3" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0" stop-color="#ff77d8"/>
+              <stop offset="1" stop-color="#8a3cff"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <h1 id="secret-heading" class="secret-title">Secret Page</h1>
+      <div class="secret-sub">Only Afsa is allowed here.</div>
+
+      <div class="input-row" role="form" aria-label="Secret unlock form">
+        <input id="secretInput" class="secret-input" type="password" placeholder="Enter secret password" aria-label="Secret password">
+        <button id="unlockBtn" class="unlock-btn" aria-label="Unlock">Unlock</button>
+      </div>
+
+      <div class="hint" aria-hidden="true">Tip: press Enter or click Unlock</div>
+
+      <div id="secretMessage" class="secret-message" aria-hidden="true">
+        <h3 style="margin-top:0;margin-bottom:8px">💖 My Promise to You</h3>
+        <p style="margin:0 0 10px;line-height:1.5">
+          Afsa, this website is proof that you matter to me more than words can explain.
+          No matter where life takes us, I’ll always choose you as my best friend.
+          Always.
+        </p>
+        <p style="margin:0;font-size:14px;color:#666">— Tarun</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Made with 💖 by Tarun</p>
+  </footer>
+
+  <!-- Lightbox modal -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="close" id="lbClose" aria-label="Close">✕</button>
+    <div>
+      <img id="lbImage" src="" alt="">
+      <div class="caption" id="lbCaption"></div>
+    </div>
+  </div>
+
+  <script>
+    // Fixed secret-unlock script (combined)
+    document.addEventListener("DOMContentLoaded", () => {
+      const PASSWORD = "afsa_forever"; // 🔐 password
+
+      const input = document.getElementById("secretInput");
+      const btn = document.getElementById("unlockBtn");
+      const message = document.getElementById("secretMessage");
+
+      // Safety check (prevents console errors)
+      if (!input || !btn || !message) {
+        console.error("Secret page elements not found: ensure IDs secretInput, unlockBtn and secretMessage exist.");
+        return;
+      }
+
+      let unlocked = false;
+
+      function unlock() {
+        if (unlocked) return;
+        unlocked = true;
+
+        // Show secret message
+        message.style.display = "block";
+        message.setAttribute("aria-hidden", "false");
+
+        // Smooth hide input + button
+        [input, btn].forEach((el) => {
+          el.style.transition = "opacity .25s ease, transform .25s ease";
+          el.style.opacity = "0";
+          el.style.transform = "translateY(-6px)";
+        });
+
+        setTimeout(() => {
+          input.style.display = "none";
+          btn.style.display = "none";
+        }, 260);
+
+        message.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      function isCorrect(value) {
+        return typeof value === "string" && value.trim() === PASSWORD;
+      }
+
+      function checkAutoUnlock() {
+        if (unlocked) return;
+        if (isCorrect(input.value)) {
+          unlock();
+        }
+      }
+
+      function shake(el) {
+        if (!el) return;
+        el.animate(
+          [
+            { transform: "translateX(0)" },
+            { transform: "translateX(-8px)" },
+            { transform: "translateX(6px)" },
+            { transform: "translateX(-4px)" },
+            { transform: "translateX(2px)" },
+            { transform: "translateX(0)" },
+          ],
+          { duration: 360, easing: "cubic-bezier(.2,.9,.3,1)" }
+        );
+      }
+
+      // 🔥 Auto-unlock while typing (keeps it responsive but non-spammy)
+      input.addEventListener("input", checkAutoUnlock);
+
+      // Button click (fallback)
+      btn.addEventListener("click", () => {
+        if (unlocked) return;
+        if (isCorrect(input.value)) {
+          unlock();
+        } else {
+          shake(input);
+          // small timeout so shake is visible before alert + clearing
+          setTimeout(() => {
+            alert("Wrong password 💔");
+            input.value = "";
+            input.focus();
+          }, 120);
+        }
+      });
+
+      // Enter key support
+      input.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          if (unlocked) return;
+          if (isCorrect(input.value)) {
+            unlock();
+          } else {
+            shake(input);
+            setTimeout(() => {
+              alert("Wrong password 💔");
+              input.value = "";
+              input.focus();
+            }, 120);
+          }
+        }
+      });
+
+      // Focus input on load
+      input.focus();
+
+      // --- LIGHTBOX: gallery images ---
+      const galleryImages = document.querySelectorAll('.gallery img');
+      const lightbox = document.getElementById('lightbox');
+      const lbImage = document.getElementById('lbImage');
+      const lbCaption = document.getElementById('lbCaption');
+      const lbClose = document.getElementById('lbClose');
+
+      function openLightbox(src, alt, idx) {
+        lbImage.src = src;
+        lbImage.alt = alt || 'photo';
+        lbCaption.textContent = (alt ? alt + ' ' : '') + (idx ? `• Photo ${idx}` : '');
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        lbClose.focus();
+      }
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        lbImage.src = '';
+      }
+
+      galleryImages.forEach(img => {
+        img.tabIndex = 0;
+        img.addEventListener('click', () => openLightbox(img.src, img.alt, img.dataset.index));
+        img.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); img.click(); }});
+      });
+
+      lbClose.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+      // Hide secret on reload for privacy
+      window.addEventListener('beforeunload', () => {
+        message.style.display = 'none';
+        message.setAttribute('aria-hidden','true');
+      });
+    });
+  </script>
+</body>
+</html>
